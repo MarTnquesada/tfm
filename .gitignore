@@ -1,3 +1,9 @@
+### SPECIFIC FILE IGNORES
+xnmt/
+
+
+
+### STANDARD PYTHON IGNORES
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
