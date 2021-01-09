@@ -1,6 +1,6 @@
 ### SPECIFIC FILE IGNORES
 xnmt/
-
+.idea/
 
 
 ### STANDARD PYTHON IGNORES
