@@ -1,5 +1,5 @@
-tqdm
-spacy
-Cython
+subword-nmt
+nematus
+numpy
 torch
-git+https://github.com/neulab/xnmt.git@38044b36e6263b2608bede28b4e5cf3e4e7accda
+
