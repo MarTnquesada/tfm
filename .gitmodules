@@ -1,0 +1,6 @@
+[submodule "tfm/crossmapping/muse/MUSE"]
+	path = tfm/crossmapping/muse/MUSE
+	url = https://github.com/MarTnquesada/MUSE.git
+[submodule "tfm/crossmapping/xlm/XLM"]
+	path = tfm/crossmapping/xlm/XLM
+	url = https://github.com/MarTnquesada/XLM.git

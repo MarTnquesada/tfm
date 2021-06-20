@@ -13,7 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from tfm.vecmap import embeddings
+from tfm.crossmapping.vecmap import embeddings
+
 import argparse
 import collections
 import numpy as np
@@ -21,7 +22,6 @@ import re
 import sys
 import time
 
-import fasttext
 
 def dropout(m, p):
     if p <= 0.0:
@@ -141,19 +141,10 @@ def main():
         dtype = 'float64'
 
     # Read input embeddings
-    # srcfile = open(args.src_input, encoding=args.encoding, errors='surrogateescape')
-    # trgfile = open(args.trg_input, encoding=args.encoding, errors='surrogateescape')
-    # src_words, x = embeddings.read(srcfile, dtype=dtype)
-    # trg_words, z = embeddings.read(trgfile, dtype=dtype)
-    ######################
-    # modification in order to read fasttext embeddings instead of the ones defined in the monoses module (PHRASE2VEC)
-    src_model = fasttext.load_model(args.src_input)
-    trg_model = fasttext.load_model(args.trg_input)
-    src_words = src_model.get_words()
-    x = np.array([np.array(src_model.get_word_vector(word), dtype=dtype) for word in src_words], dtype=dtype)
-    trg_words = trg_model.get_words()
-    z = np.array([np.array(trg_model.get_word_vector(word), dtype=dtype) for word in trg_words], dtype=dtype)
-    ######################
+    srcfile = open(args.src_input, encoding=args.encoding, errors='surrogateescape')
+    trgfile = open(args.trg_input, encoding=args.encoding, errors='surrogateescape')
+    src_words, x = embeddings.read(srcfile, dtype=dtype)
+    trg_words, z = embeddings.read(trgfile, dtype=dtype)
 
     # NumPy/CuPy management
     if args.cuda:
