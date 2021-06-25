@@ -15,4 +15,4 @@ subword-nmt apply-bpe -c $CODES_FILE --vocabulary $VOCAB_FILE.$L1 --vocabulary-t
 subword-nmt apply-bpe -c $CODES_FILE  --vocabulary $VOCAB_FILE.$L2 --vocabulary-threshold 50 < $CORPUS_FILE.$L2 > $CORPUS_FILE.BPE.$L2
 
 # As a last step, extract the vocabulary to be used by the neural network. Example with Nematus:
-nematus/data/build_dictionary.py $CORPUS_FILE.BPE.$L1 $CORPUS_FILE.BPE.$L2
+# nematus/data/build_dictionary.py $CORPUS_FILE.BPE.$L1 $CORPUS_FILE.BPE.$L2

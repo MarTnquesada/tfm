@@ -7,7 +7,6 @@ mkdir data
 mkdir data/datasets
 mkdir data/trained_models
 
-
 # Set up conda environment
 /usr/local/anaconda3/bin/conda init
 conda create -y --no-default-packages --prefix env python=3.7
