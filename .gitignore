@@ -1,6 +1,8 @@
 ### SPECIFIC FILE IGNORES
 xnmt/
 .idea/
+data/
+tfm/embeddings/fasttext/fastText/
 
 
 ### STANDARD PYTHON IGNORES

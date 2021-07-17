@@ -2,4 +2,4 @@ subword-nmt
 #nematus
 numpy
 torch
-
+bs4
