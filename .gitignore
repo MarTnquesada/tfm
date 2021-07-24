@@ -1,8 +1,10 @@
 ### SPECIFIC FILE IGNORES
-xnmt/
+xnmt/datasets/
 .idea/
 data/
+tfm/preprocessing/fastBPE/
 tfm/embeddings/fasttext/fastText/
+notes.txt
 
 
 ### STANDARD PYTHON IGNORES

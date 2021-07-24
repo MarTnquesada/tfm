@@ -1,5 +1,3 @@
-subword-nmt
-#nematus
 numpy
-torch
+cupy
 bs4

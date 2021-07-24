@@ -4,7 +4,7 @@ This repository contains code, data and links that can be used to reproduce the 
 
 
 ### Corpora
-This work used almost exclusively corpora released in the WMT14 translation task (see https://www.statmt.org/wmt14/translation-task.html).
+This work used exclusively corpora released in the WMT14 translation task (see https://www.statmt.org/wmt14/translation-task.html).
 
 *Monolingual data:* 
 - *EN*: News Crawl 2011-2013
@@ -31,14 +31,43 @@ In this case, there is a similar dataset size for all language pairs barring Hin
    
 The dev corpora used is an aggregation of the development sets provided in the task. Similarly, the filtered test sets used to obtain the final results in the task are used as test dataset.
    
-Execute the bash script tfm/preprocessing/pack-corpora.sh to pack the previously listed corpora into the monolingual and parallel datasets used in this work.
+To compile the corpus used in the experiments presented in the project related to this repository, first download all previously mentioned datasets and organize them as follows in the root level of this project:
+```
+
+tfm/
+    |
+    data/
+    |   |--datasets/
+    |       |--monolingual_sources/
+    |       |   |--hindmonocorp05/
+    |       |   |--newscrawl
+    |       |
+    |       |--parallel_sources/
+    |           |--commoncrawl
+    |           |--dev
+    |           |--europarl-v7
+    |           |--hindencorp05
+    |           |--test
+    |           |--yandex1mcorpus
+    tfm/
+    |   |--...
+    ...      
+```
+After this, execute the bash script `tfm/preprocessing/pack-corpora.sh` to pack the previously listed corpora within a `monolingual` and a `parallel` folder within the `data/datasets` path.
 
 ### Pre-processing
+
+The following steps are applied for all monolingual and parallel corpora:
+   - Normalize unicode punctuation econding.
+   - Tokenization.
+   - Clean and eliminate empty sentences, sentences with a ratio higher than 1-9 from source to target, and those containing more than 60 words.
+
+To apply this pre-processing to the corpus, install a Moses Docker image named "moses" and execute the script `tfm/preprocessing/normalize-tokenize-clean.sh`.
+
 
 No truecasing since it seems kind of inconsecuential for this application, given that it applies capital letters to the beginning of sentences (check this file:///Users/martin/Downloads/information-10-00161.pdf) and we want to modify as little as possible the given dev and test sets
 
 HEY WHAT YOU HAVE DONE IS GOOD BUT CHECK THIS, LOOKS INTERESTING https://github.com/rsennrich/wmt16-scripts/blob/master/sample/preprocess.sh
-
 
 
 ### Monolingual embedding training
@@ -54,7 +83,7 @@ In the case of L2-distance, use the option --dot. For cosine similarity, omit th
 ### Transformer NN training (with pre-trained cross-lingual embeddings)
 
 **NMT-Keras**
-
+xd
 
 ### Transformer NN evaluation (with pre-trained cross-lingual embeddings)
 
