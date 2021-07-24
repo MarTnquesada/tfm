@@ -7,12 +7,12 @@ for lang in en fr de ru hi; do
     docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/tokenizer/normalize-punctuation.perl -l ${lang} < ${file}.${lang} > ${file}.norm.${lang}"
     docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/tokenizer/tokenizer.perl -l ${lang} < ${file}.norm.${lang} > ${file}.tok.${lang}"
     docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/training/clean-corpus-n.perl ${file}.tok ${lang} ${lang} ${file}.clean 1 60"
-    rm ${file}.norm.${lang}
-    rm ${file}.tok.${lang}
+    docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.norm.${lang}"
+    docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.tok.${lang}"
 done
 
+
 # Normalize encoding, clean and tokenize parallel corpus
-command=""
 for lang in fr de ru hi; do
     for set in train dev test; do
         file=/data/datasets/parallel/${lang}-en.${set}
@@ -21,9 +21,9 @@ for lang in fr de ru hi; do
         docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/tokenizer/tokenizer.perl -l ${lang} < ${file}.norm.${lang} > ${file}.tok.${lang}"
         docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/tokenizer/tokenizer.perl -l en < ${file}.norm.en > ${file}.tok.en"
         docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "scripts/training/clean-corpus-n.perl ${file}.tok ${lang} en ${file}.clean 1 60"
-        rm ${file}.norm.${lang}
-        rm ${file}.norm.en
-        rm ${file}.tok.${lang}
-        rm ${file}.tok.en
+        docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.norm.${lang}"
+        docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.norm.en"
+        docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.tok.${lang}"
+        docker container run -it --rm -v ${PWD}/data/:/data moses /bin/bash -c "rm ${file}.tok.en"
     done
 done
