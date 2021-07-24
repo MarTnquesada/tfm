@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
+from tfm.crossmapping.vecmap.cupy_utils import get_array_module, asnumpy
 
 
 def read(file, threshold=0, vocabulary=None, dtype='float'):

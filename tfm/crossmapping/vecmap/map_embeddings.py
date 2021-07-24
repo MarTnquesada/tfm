@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from tfm.crossmapping.vecmap import embeddings
-from tfm.crossmapping.vecmap.cupy_utils import supports_cupy, get_cupy, get_array_module
+from tfm.crossmapping.vecmap.cupy_utils import supports_cupy, get_cupy, get_array_module, asnumpy
 import argparse
 import collections
 import numpy as np
