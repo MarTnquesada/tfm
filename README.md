@@ -64,26 +64,54 @@ The following steps are applied for all monolingual and parallel corpora:
 
 To apply this pre-processing to the corpus, install a Moses Docker image named "moses" and execute the script `tfm/preprocessing/normalize-tokenize-clean.sh`.
 
+In some of the experiments, byte-pair encoding (BPE) is applied to the training datasets in order to evaluate its effect on cross-lingual embeddings and their use as pre-training:
 
-No truecasing since it seems kind of inconsecuential for this application, given that it applies capital letters to the beginning of sentences (check this file:///Users/martin/Downloads/information-10-00161.pdf) and we want to modify as little as possible the given dev and test sets
+   - For joint BPE embeddings, where both source and target language share the same codes and vocabulary size, use the script `tfm/preprocessing/fastbpe_joint.sh`.
+    In general, this approach is most effective when two languages share an alphabet, and facilitates learning cross-lingual features.
+   - For independent BPE embeddings (each language's codes are define on their own), use `tfm/preprocessing/fastbpe_independent.sh`.
+   
+For both options, the monolingual side of the corpora is used to learn the codes and define the vocabulary.
+Remember that, when using BPE, it will also need to be applied to bilingual dictionaries used to evaluate cross-lingual models (IMPORTANT: CHECK IF USING THE VOCABULARY WHEN APPLYING BPE TO THE EVAL DICT HAS ANY ADVERSE EFFECT).
+
+<!---
+your comment goes here
+and here
+% No truecasing since it seems kind of inconsecuential for this application, given that it applies capital letters to the beginning of sentences 
 
 HEY WHAT YOU HAVE DONE IS GOOD BUT CHECK THIS, LOOKS INTERESTING https://github.com/rsennrich/wmt16-scripts/blob/master/sample/preprocess.sh
-
+-->
 
 ### Monolingual embedding training
 
+Two main embedding models were used in this work:
+   - **Word2vec skip-gram embeddings**. For this, the FastText framework was used, although only the word vectors (.vec) files were used for experimentation, ignoring the models containing subword information (.bin).
+   All embeddings used default parameters except for dimension, whose effects are studied in this work: `./tfm/embeddings/fasttext/fastText/fasttext skipgram -input <INPUT> -output <OUTPUT> -minn 3 -maxn 6 -dim <DIM> -epoch 5 -lr 0.05`
+   To generate all FastText embeddings used in this work, use `tfm/embeddings/fasttext/run.sh`.
+   - **XLM (cross-lingual language model)**. 
+   
+### Cross-lingual embedding mapping
+
+   - **VecMap**. An example launch of the VecMap cross-mapping procedure for a pair of FastText embeddings in French and English with dimension 100 would be the following:
+   `python -m tfm.crossmapping.vecmap.map_embeddings data/embeddings/monolingual-fr-3-6-100.vec data/embeddings/monolingual-en-3-6-100.vec data/embeddings/monolingual-fr-3-6-100-en.vec data/embeddings/monolingual-en-3-6-100-fr.vec --cuda --batch_size 1000 --unsupervised --verbose`
+    There are some known issues with memory allocation with VecMap that can be alleviated by using a small batch size as shown (2000 for dimension 100, or 250 for dimension 300), even if the size of each individual batch does not seem to pose problems, but rather the final memory dump at the end of the training run.
+    This problem can be also avoided by limiting the vocabulary size, an option that is not used in this work.
+    To run get all cross-mapped embeddings used in this work, use `tfm/embeddings/crossmapping/vecmap/run.sh`.
+   - **MUSE**
+   - *Concat*
+   - **XLM**
 
 ### Cross-lingual embedding evaluation
-**Word translation (BLI)**
-
-For both L2-distance and cosine similarity evaluations, the script `tfm/evaluation/evaluate_embedding_word_translation`, taken from the VecMap repository, is used.
-In the case of L2-distance, use the option --dot. For cosine similarity, omit this parameter.
+   - **Word translation (BLI)**. For both L2-distance and cosine similarity evaluations, the script `tfm/evaluation/evaluate_embedding_word_translation`, taken from the VecMap repository, is used.
+   In the case of L2-distance, use the option --dot. For cosine similarity, omit this parameter. 
+   An example for the evaluation of fr-en cross-mapped embeddings could be `python -m tfm.evaluation.evaluate_embedding_word_translation data/embeddings/monolingual-fr-3-6-100-en.vec data/embeddings/monolingual-en-3-6-100-fr.vec -d data/datasets/eval_dicts/fr-en.txt --cuda`
+   The bilingual dictionaries used for evaluation are the full sets provided in https://github.com/facebookresearch/MUSE.
 
 
 ### Transformer NN training (with pre-trained cross-lingual embeddings)
 
-**NMT-Keras**
-xd
+   - **NMT-Keras**
+   - **OpenNMT**
+   - **MarianMT**
 
 ### Transformer NN evaluation (with pre-trained cross-lingual embeddings)
 
