@@ -13,8 +13,19 @@ cd tfm/preprocessing/fastBPE/
 g++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
 cd ../../../
 
+
 # Set up conda environment
 /usr/local/anaconda3/bin/conda init
 conda create -y --no-default-packages --prefix env python=3.7
 conda activate env/
 pip install -r requirements.txt
+
+# MUSE dependencies
+pip install torch
+pip install faiss
+
+# Install XLM
+cd ././tfm/crossmapping/xlm/XLM/
+pip install -e .
+cd ../../../../
+
