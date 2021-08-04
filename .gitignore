@@ -5,6 +5,7 @@ data/
 tfm/preprocessing/fastBPE/
 tfm/embeddings/fasttext/fastText/
 notes.txt
+.DS_Store
 
 
 ### STANDARD PYTHON IGNORES
