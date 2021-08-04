@@ -93,12 +93,12 @@ Two main embedding models were used in this work:
 
    - **VecMap**. An example launch of the VecMap cross-mapping procedure for a pair of FastText embeddings in French and English with dimension 100 would be the following:
    `python -m tfm.crossmapping.vecmap.map_embeddings data/embeddings/monolingual-fr-3-6-100.vec data/embeddings/monolingual-en-3-6-100.vec data/embeddings/monolingual-fr-3-6-100-en.vec data/embeddings/monolingual-en-3-6-100-fr.vec --cuda --batch_size 1000 --unsupervised --verbose`
-    There are some known issues with memory allocation with VecMap that can be alleviated by using a small batch size as shown (2000 for dimension 100, or 250 for dimension 300), even if the size of each individual batch does not seem to pose problems, but rather the final memory dump at the end of the training run.
-    This problem can be also avoided by limiting the vocabulary size, an option that is not used in this work.
-    To run get all cross-mapped embeddings used in this work, use `tfm/embeddings/crossmapping/vecmap/run.sh`.
-   - **MUSE**
-   - *Concat*
-   - **XLM**
+    There exists a known bug that creates memory allocation problems for mappings of embeddings with dimension greater than 150 when using CUDA support.
+    For this reason, mappings for embeddings of dimension >= 150 are calculated on CPU.
+    To get all VecMap cross-mapped embeddings used in this work, use `tfm/crossmapping/vecmap/run.sh`.
+   - **MUSE**. To get all MUSE cross-mapped embeddings used in this work, use `tfm/crossmapping/muse/run.sh`.
+   - *Concat*. Trains FastText embeddings over a concatenation of monolingual corpora. To get all concat embeddings used in this work, use `tfm/embeddings/fasttext/run_concat.sh`.
+   - **XLM**. 
 
 ### Cross-lingual embedding evaluation
    - **Word translation (BLI)**. For both L2-distance and cosine similarity evaluations, the script `tfm/evaluation/evaluate_embedding_word_translation`, taken from the VecMap repository, is used.

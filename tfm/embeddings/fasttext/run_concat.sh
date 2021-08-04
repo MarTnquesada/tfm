@@ -5,7 +5,7 @@ for lang in fr de ru hi; do
         cat ././../../../data/datasets/monolingual/monolingual.clean.${lang} >> ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en
         cat ././../../../data/datasets/monolingual/monolingual.clean.en >> ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en
         ./fastText/fasttext skipgram -input ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en -output ././../../../data/embeddings/monolingual-${lang}-en-3-6-${dimension} -minn 3 -maxn 6 -dim ${dimension} -epoch 5 -lr 0.05
-        rm ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}.bin
+        rm ././../../../data/embeddings/monolingual-${lang}-en-3-6-${dimension}.bin
         rm ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en
     done
 done

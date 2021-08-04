@@ -1,0 +1,1 @@
+All dockerfiles have been taken from https://github.com/midobal/dockerfiles
