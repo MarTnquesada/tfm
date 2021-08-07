@@ -20,6 +20,7 @@ import argparse
 import collections
 import numpy as np
 import sys
+import fastBPE
 
 
 BATCH_SIZE = 500
@@ -58,6 +59,12 @@ def main():
     parser.add_argument('--seed', type=int, default=0, help='the random seed')
     parser.add_argument('--precision', choices=['fp16', 'fp32', 'fp64'], default='fp32', help='the floating-point precision (defaults to fp32)')
     parser.add_argument('--cuda', action='store_true', help='use cuda (requires cupy)')
+    parser.add_argument('--bpe', action='store_true', help='apply bpe tokenization to the evaluation dictionaries')
+    parser.add_argument('--src_codes_path', help='path to code file for the source language')
+    parser.add_argument('--src_vocab_path', help='path to vocab for the source language ')
+    parser.add_argument('--trg_codes_path', help='path to code file for the target language')
+    parser.add_argument('--trg_vocab_path', help='path to vocab for the target language ')
+
     args = parser.parse_args()
 
     # Choose the right dtype for the desired precision
@@ -67,6 +74,10 @@ def main():
         dtype = 'float32'
     elif args.precision == 'fp64':
         dtype = 'float64'
+
+    if args.bpe:
+        src_bpe = fastBPE.fastBPE(args.src_codes_path, args.src_vocab_path)
+        trg_bpe = fastBPE.fastBPE(args.trg_codes_path, args.trg_vocab_path)
 
     # Read input embeddings
     srcfile = open(args.src_embeddings, encoding=args.encoding, errors='surrogateescape')
@@ -102,6 +113,9 @@ def main():
     vocab = set()
     for line in f:
         src, trg = line.split()
+        if args.bpe:
+            src = src_bpe.apply([src])
+            trg = trg_bpe.apply([trg])
         try:
             src_ind = src_word2ind[src]
             trg_ind = trg_word2ind[trg]

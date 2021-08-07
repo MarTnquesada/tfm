@@ -96,8 +96,8 @@ Two main embedding models were used in this work:
     There exists a known bug that creates memory allocation problems for mappings of embeddings with dimension greater than 150 when using CUDA support.
     For this reason, mappings for embeddings of dimension >= 150 are calculated on CPU.
     To get all VecMap cross-mapped embeddings used in this work, use `tfm/crossmapping/vecmap/run.sh`.
-   - **MUSE**. To get all MUSE cross-mapped embeddings used in this work, use `tfm/crossmapping/muse/run.sh`.
-   - *Concat*. Trains FastText embeddings over a concatenation of monolingual corpora. To get all concat embeddings used in this work, use `tfm/embeddings/fasttext/run_concat.sh`.
+   - **MUSE**. To get all MUSE cross-mapped embeddings used in this work, use `tfm/crossmapping/muse/run.sh`. Both VecMap and MUSE use a maximum vocabulary size of 20000.
+   - **Concat**. Trains FastText embeddings over a concatenation of monolingual corpora. To get all concat embeddings used in this work, use `tfm/embeddings/fasttext/run_concat.sh`.
    - **XLM**. 
 
 ### Cross-lingual embedding evaluation
@@ -109,9 +109,9 @@ Two main embedding models were used in this work:
 
 ### Transformer NN training (with pre-trained cross-lingual embeddings)
 
-   - **NMT-Keras**
-   - **OpenNMT**
-   - **MarianMT**
+OpenNMT
+
+- Use 2 GPUS with --num_gpus 2 to maximize speed
 
 ### Transformer NN evaluation (with pre-trained cross-lingual embeddings)
 
