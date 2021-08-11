@@ -12,7 +12,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-3-6-${dimension}-vecmap-en.vec \
         data/embeddings/monolingual-en-3-6-${dimension}-vecmap-${lang}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --cuda
+        --retrieval csls
     done
 done
 echo ---\[L2 DISTANCE\]---
