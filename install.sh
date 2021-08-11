@@ -24,6 +24,7 @@ conda activate env/
 pip install -r requirements.txt
 
 # Install fastBPE Python API
+pip install cython
 cd tfm/preprocessing/fastBPE/
 python setup.py install
 cd ../../../
