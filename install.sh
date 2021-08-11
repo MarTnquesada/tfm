@@ -29,8 +29,12 @@ python setup.py install
 cd ../../../
 
 # Install MUSE dependencies
+cd tfm/embeddings/muse
+git clone https://github.com/facebookresearch/MUSE
+cd ../../../
 pip install torch
-pip install faiss
+conda install -c pytorch faiss-gpu --force
+pip install scipy
 
 # Install XLM
 cd ././tfm/crossmapping/xlm/XLM/

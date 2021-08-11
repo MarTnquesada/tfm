@@ -109,12 +109,22 @@ Two main embedding models were used in this work:
 
 ### Transformer NN training (with pre-trained cross-lingual embeddings)
 
-OpenNMT
+To assess the utility of the generated word embeddings, those are integrated in a neural machine translation model.
+Particularly, an OpenNMT-py Transformer model that mimics the original Transformer architecture proposed in https://arxiv.org/abs/1706.03762. 
+More information on this setup can be found in https://opennmt.net/OpenNMT-py/FAQ.html#how-do-i-use-the-transformer-model.
+ 
+NOTE: OpenNMT does not use epochs to determine training length. Instead, one must specify the number of training steps to take, where each step is equivalent to training over *n* samples, where *n* is the batch_size.
+To calculate the number of steps that are equivalent to a conventional epoch for a given corpus, divide the total number of samples by the batch size. 
+For instance, for a corpus with 1,000,000 sentences and a batch size of 32, one epoch should contain 1,000,000 / 32 = 31,250 steps.
+Keep in mind that the samples are chosen at random.
+How to calculate epochs in OpenNMT https://forum.opennmt.net/t/training-steps-continue-training-explanation/2772 
 
-- Use 2 GPUS with --num_gpus 2 to maximize speed
 
 ### Transformer NN evaluation (with pre-trained cross-lingual embeddings)
 
+The evaluation the resulting OpenNMT Transformer models is done attending to BLEU, particularly the calcuation for said metric provided by the Moses package.
+To evaluate all generated models, launch the script `tfm/evaluation/run_evaluate_bleu.sh`.
+To reproduce this work's results, perform the evaluation over the test set of the available parallel corpora.
 
 
 ### License
