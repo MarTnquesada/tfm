@@ -8,5 +8,6 @@ for lang in fr de ru hi; do
             --src_emb ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec \
             --tgt_emb ././../../../data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec \
             --emb_dim ${dimension} --max_vocab 20000 --cuda True
+            # If cuda memory error, its probably necessary to reduce vocab size
     done
 done
