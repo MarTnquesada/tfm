@@ -34,6 +34,7 @@ cd tfm/embeddings/muse
 git clone https://github.com/facebookresearch/MUSE
 cd ../../../
 pip install torch
+pip install cupy
 conda install -c pytorch faiss-gpu --force
 pip install scipy
 

@@ -58,7 +58,7 @@ After this, execute the bash script `tfm/preprocessing/pack-corpora.sh` to pack 
 ### Pre-processing
 
 The following steps are applied for all monolingual and parallel corpora:
-   - Normalize unicode punctuation econding.
+   - Normalize unicode punctuation enconding.
    - Tokenization.
    - Clean and eliminate empty sentences, sentences with a ratio higher than 1-9 from source to target, and those containing more than 60 words.
 
