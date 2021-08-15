@@ -5,21 +5,21 @@
 
 # Requires that corpora are tokenized with BPE - this script takes joint BPE tokenization
 for lang in fr de ru hi; do
-    for dimension in 50 100 150 200 250 300; do
+    for dimension in 1024; do
         # Binarize vocab and training data
         # Source
         python XLM/preprocess.py \
-        ././../../../data/datasets/monolingual/${monolingual_file}.clean.${lang}-en.bpe_${n_ops}.${lang}-en.vocab \
-        ././../../../data/datasets/monolingual/${monolingual_file}.clean.${lang}.bpe_${n_ops}.${lang}-en
+        ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en.bpe_48000.${lang}-en.vocab \
+        ././../../../data/datasets/monolingual/monolingual.clean.${lang}.bpe_48000.${lang}-en
         # Target
         python XLM/preprocess.py \
-        ././../../../data/datasets/monolingual/${monolingual_file}.clean.${lang}-en.bpe_${n_ops}.${lang}-en.vocab \
-        ././../../../data/datasets/monolingual/${monolingual_file}.clean.en.bpe_${n_ops}.${lang}-en
+        ././../../../data/datasets/monolingual/monolingual.clean.${lang}-en.bpe_48000.${lang}-en.vocab \
+        ././../../../data/datasets/monolingual/monolingual.clean.en.bpe_48000.${lang}-en
 
         # Train XLM model (MLM only) from monolingual corpora
-        python XLM/train.py
+        ./pretrain.sh
 
         # Train model on supervised corpora from pretrained XLM
-        python XLM/train.py
+        ./train_unsupervised.sh
     done
 done
