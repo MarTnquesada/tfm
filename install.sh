@@ -6,7 +6,8 @@ mkdir data/datasets
 mkdir data/models
 cp tfm/tfm/train-nmt-opennmt-py/configs/ data/models/
 mkdir data/models/trained/
-mkdir data/embeddings
+mkdir data/models/xlm/
+mkdir data/embeddings/
 
 # Set up docker installations and local paths for their execution
 docker build -t moses dockerfiles/moses/.
