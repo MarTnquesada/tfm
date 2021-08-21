@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 for lang in fr de ru hi; do
-    for dimension in 50 100 150 200 250; do
-        cp ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}.vec ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec
-        cp ././../../../data/embeddings/monolingual-en-3-6-${dimension}.vec ././../../../data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec
+    for dimension in 50 100 150 200 250 300; do
         python MUSE/unsupervised.py --src_lang ${lang} --tgt_lang en \
-            --src_emb ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec \
-            --tgt_emb ././../../../data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec \
-            --emb_dim ${dimension} --max_vocab 20000 --dis_most_frequent 7500  --cuda True # --dico_max_size 20000
-            # If cuda memory error, its probably necessary to reduce vocab size
+            --src_emb ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}.vec \
+            --tgt_emb ././../../../data/embeddings/monolingual-en-3-6-${dimension}.vec \
+            --emb_dim ${dimension} --max_vocab 20000 --dis_most_frequent 7500 \
+            --exp_path ~/tfm/data/embeddings/ --exp_name ${lang}-en --exp_id ${dimension} \
+            --normalize_embeddings center --cuda True
+            # If cuda memory error, its probably necessary to reduce vocab size --dico_max_size 20000
     done
 done
