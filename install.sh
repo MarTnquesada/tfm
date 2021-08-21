@@ -31,7 +31,7 @@ python setup.py install
 cd ../../../
 
 # Install MUSE dependencies
-cd tfm/embeddings/muse
+cd tfm/crossmapping/muse
 pip install torch
 pip install cupy
 conda install -c pytorch faiss-gpu --force

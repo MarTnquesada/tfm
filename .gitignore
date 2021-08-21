@@ -4,6 +4,7 @@ xnmt/datasets/
 data/
 tfm/preprocessing/fastBPE/
 tfm/embeddings/fasttext/fastText/
+bpe.out
 notes.txt
 .DS_Store
 
