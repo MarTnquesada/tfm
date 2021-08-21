@@ -8,7 +8,7 @@
 # number of merge operations estimated from https://aclanthology.org/2020.findings-emnlp.352.pdf
 n_ops=48000
 
-for lang in de ru hi; do
+for lang in fr de ru hi; do
     # Monolingual corpus
     monolingual_file=././../../data/datasets/monolingual/monolingual
     file=././../../data/datasets/parallel/${lang}-en
