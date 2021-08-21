@@ -7,7 +7,7 @@ for lang in fr de ru hi; do
         python MUSE/unsupervised.py --src_lang ${lang} --tgt_lang en \
             --src_emb ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec \
             --tgt_emb ././../../../data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec \
-            --emb_dim ${dimension} --max_vocab 20000 --dis_most_frequent 7500 --cuda True
+            --emb_dim ${dimension} --max_vocab 20000 --dis_most_frequent 7500  --cuda True # --dico_max_size 20000
             # If cuda memory error, its probably necessary to reduce vocab size
     done
 done
