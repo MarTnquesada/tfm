@@ -6,7 +6,7 @@ for lang in fr de ru hi; do
             --src_emb ././../../../data/embeddings/monolingual-${lang}-3-6-${dimension}.vec \
             --tgt_emb ././../../../data/embeddings/monolingual-en-3-6-${dimension}.vec \
             --emb_dim ${dimension} --max_vocab 20000 --dis_most_frequent 7500 \
-            --exp_path ~/tfm/data/embeddings/ --exp_name ${lang}-en --exp_id ${dimension} \
+            --exp_path ~/tfm/data/embeddings/ --exp_name ${lang}-en-muse --exp_id ${dimension} \
             --normalize_embeddings center --cuda True
             # If cuda memory error, its probably necessary to reduce vocab size --dico_max_size 20000
     done
