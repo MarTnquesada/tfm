@@ -68,8 +68,8 @@ for lang in fr de ru hi; do
     for dimension in 50 100 150 200 250 300; do
         echo ${lang}   ---   ${dimension}
         python3 -m tfm.evaluation.evaluate_embedding_word_translation \
-        data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec \
-        data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec \
+        data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-${lang}.txt \
+        data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-en.txt \
         -d data/datasets/eval_dicts/${lang}-en.txt \
         --retrieval csls --cuda
     done
@@ -80,8 +80,8 @@ for lang in fr de ru hi; do
     for dimension in 50 100 150 200 250 300; do
         echo ${lang}   ---   ${dimension}
         python3 -m tfm.evaluation.evaluate_embedding_word_translation \
-        data/embeddings/monolingual-${lang}-3-6-${dimension}-muse-en.vec \
-        data/embeddings/monolingual-en-3-6-${dimension}-muse-${lang}.vec \
+        data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-${lang}.txt \
+        data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-en.txt \
         -d data/datasets/eval_dicts/${lang}-en.txt \
         --retrieval csls --dot --cuda
     done
