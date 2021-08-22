@@ -12,7 +12,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-3-6-${dimension}.vec \
         data/embeddings/monolingual-en-3-6-${dimension}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --cuda
+        --retrieval csls
     done
 done
 
@@ -26,7 +26,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-3-6-${dimension}.vec \
         data/embeddings/monolingual-en-3-6-${dimension}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot --cuda
+        --retrieval csls --dot
     done
 done
 
@@ -42,7 +42,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-3-6-${dimension}-vecmap-en.vec \
         data/embeddings/monolingual-en-3-6-${dimension}-vecmap-${lang}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --cuda
+        --retrieval csls
     done
 done
 echo ---\[L2 DISTANCE\]---
@@ -54,7 +54,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-3-6-${dimension}-vecmap-en.vec \
         data/embeddings/monolingual-en-3-6-${dimension}-vecmap-${lang}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot --cuda
+        --retrieval csls --dot
     done
 done
 
@@ -71,7 +71,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-${lang}.txt \
         data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-en.txt \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --cuda
+        --retrieval csls
     done
 done
 echo ---\[L2 DISTANCE\]---
@@ -83,7 +83,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-${lang}.txt \
         data/embeddings/monolingual-${lang}-en-muse/${dimension}/vectors-en.txt \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot --cuda
+        --retrieval csls --dot
     done
 done
 
@@ -100,7 +100,7 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
         data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --cuda
+        --retrieval csls
     done
 done
 echo ---\[L2 DISTANCE\]---
@@ -112,6 +112,6 @@ for lang in fr de ru hi; do
         data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
         data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
         -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot --cuda
+        --retrieval csls --dot
     done
 done
