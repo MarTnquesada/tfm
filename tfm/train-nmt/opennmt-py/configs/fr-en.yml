@@ -32,7 +32,7 @@ embeddings_type: "word2vec"
 word_vec_size: 100
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762
-# except for: embedding_size 512->100
+# except for: embedding_size 512->100, rnn_size 512->100, heads 8 -> 5
 
 # General opts
 save_checkpoint_steps: 10000
@@ -77,8 +77,8 @@ decoder_type: transformer
 position_encoding: true
 enc_layers: 6
 dec_layers: 6
-heads: 8
-rnn_size: 512 # Needs to be divisible by the number of heads
+heads: 5
+rnn_size: 100 # Needs to be divisible by the number of heads
 transformer_ff: 2048
 dropout_steps: [0]
 dropout: [0.1]
