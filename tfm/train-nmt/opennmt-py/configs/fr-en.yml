@@ -31,13 +31,18 @@ tgt_embeddings: data/embeddings/monolingual-en-3-6-100-vecmap-fr.vec
 embeddings_type: "word2vec"
 word_vec_size: 100
 
-# Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762
-# except for: embedding_size 512->100, rnn_size 512->100, heads 8 -> 5
+# To freeze encoder and decoder embeddings
+#freeze_word_vecs_enc: true
+#freeze_word_vecs_dec: true
+
+# Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
+# embedding_size 512->100, rnn_size 512->100, heads 8 -> 5, transformer_ff 2048 -> 1024
+# save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 1000, train_steps 200000 -> 20000
 
 # General opts
-save_checkpoint_steps: 10000
-valid_steps: 10000
-train_steps: 200000
+save_checkpoint_steps: 5000
+valid_steps: 1000
+train_steps: 20000
 # Batch size 4096 * 200000 training steps = 819,200,000 lines read for complete training
 # Since all parallel training datasets have anywhere from 5 to 2M lines (lets say average 4M),
 # this would amount to 819/4 = 205 epochs aprox.
@@ -78,8 +83,8 @@ position_encoding: true
 enc_layers: 6
 dec_layers: 6
 heads: 5
-rnn_size: 100 # Needs to be divisible by the number of heads
-transformer_ff: 2048
+rnn_size: 100 # Needs to be divisible by the number of heads, should have the same size as the embeddings
+transformer_ff: 1024
 dropout_steps: [0]
 dropout: [0.1]
 attention_dropout: [0.1]
