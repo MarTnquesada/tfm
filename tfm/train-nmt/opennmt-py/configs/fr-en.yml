@@ -15,7 +15,7 @@ save_model: data/models/trained/fr-en/model/
 
 data:
     corpus_1:
-        path_src: data/datasets/parallel/fr-en.train.clean.fr
+        path_src: ../../../../data/datasets/parallel/fr-en.train.clean.fr
         path_tgt: data/datasets/parallel/fr-en.train.clean.en
     valid:
         path_src: data/datasets/parallel/fr-en.train.clean.fr
