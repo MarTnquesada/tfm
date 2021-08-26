@@ -3,8 +3,8 @@
 ## Where the samples will be written
 save_data: data/models/trained/fr-en/fr-en
 ## Where the vocab(s) will be written
-src_vocab: data/models/trained/fr-en/vocab.src
-tgt_vocab: data/models/trained/fr-en/vocab.tgt
+src_vocab: data/models/trained/fr-en/fr-en.vocab.src
+tgt_vocab: data/models/trained/fr-en/fr-en.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
