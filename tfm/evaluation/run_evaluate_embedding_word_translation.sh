@@ -15,18 +15,8 @@ for lang in fr de ru hi; do
         --retrieval csls
     done
 done
-echo ---\[L2 DISTANCE\]---
-echo LANG   ---   DIMENSION
-for lang in fr de ru hi; do
-    for dimension in 50 100 150 200 250 300; do
-        echo ${lang}   ---   ${dimension}
-        python3 -m tfm.evaluation.evaluate_embedding_word_translation \
-        data/embeddings/${lang}-en-muse/${dimension}/vectors-${lang}.txt \
-        data/embeddings/${lang}-en-muse/${dimension}/vectors-en.txt \
-        -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot
-    done
-done
+
+
 
 
 echo
@@ -44,18 +34,7 @@ for lang in fr de ru hi; do
         --retrieval csls
     done
 done
-echo ---\[L2 DISTANCE\]---
-echo LANG   ---   DIMENSION
-for lang in fr de ru hi; do
-    for dimension in 50 100 150 200 250 300; do
-        echo ${lang}   ---   ${dimension}
-        python3 -m tfm.evaluation.evaluate_embedding_word_translation \
-        data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
-        data/embeddings/monolingual-${lang}-en-3-6-${dimension}.vec \
-        -d data/datasets/eval_dicts/${lang}-en.txt \
-        --retrieval csls --dot
-    done
-done
+
 
 echo
 echo ------------ BASELINE ------------
