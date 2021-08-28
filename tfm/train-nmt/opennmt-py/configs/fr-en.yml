@@ -1,17 +1,17 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/fr-en_300/samples
+save_data: data/models/trained/fr-en_300_unfrozen/samples
 ## Where the vocab(s) will be written
-src_vocab: data/models/trained/fr-en_300/vocab.src
-tgt_vocab: data/models/trained/fr-en_300/vocab.tgt
+src_vocab: data/models/trained/fr-en_300_unfrozen/vocab.src
+tgt_vocab: data/models/trained/fr-en_300_unfrozen/vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/fr-en_300/model
+save_model: data/models/trained/fr-en_300_unfrozen/model
 
 data:
     corpus_1:
