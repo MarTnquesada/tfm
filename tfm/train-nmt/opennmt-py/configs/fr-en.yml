@@ -1,17 +1,17 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/fr-en_100/samples
+save_data: data/models/trained/fr-en_300/samples
 ## Where the vocab(s) will be written
-src_vocab: data/models/trained/fr-en_100/vocab.src
-tgt_vocab: data/models/trained/fr-en_100/vocab.tgt
+src_vocab: data/models/trained/fr-en_300/vocab.src
+tgt_vocab: data/models/trained/fr-en_300/vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/fr-en_100/model
+save_model: data/models/trained/fr-en_300/model
 
 data:
     corpus_1:
@@ -26,17 +26,17 @@ data:
 # this means embeddings will be used for both encoder and decoder sides (only used for concat)
 #both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
 # to set src and tgt embeddings separately:
-src_embeddings: data/embeddings/monolingual-fr-3-6-100-vecmap-en.vec
-tgt_embeddings: data/embeddings/monolingual-en-3-6-100-vecmap-fr.vec
+src_embeddings: data/embeddings/monolingual-fr-3-6-300-vecmap-en.vec
+tgt_embeddings: data/embeddings/monolingual-en-3-6-300-vecmap-fr.vec
 embeddings_type: "word2vec"
-word_vec_size: 100
+word_vec_size: 300
 
 # To freeze encoder and decoder embeddings
 #freeze_word_vecs_enc: true
 #freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
-# embedding_size 512->100, rnn_size 512->100, heads 8 -> 5, transformer_ff 2048 -> 1024
+# embedding_size 512->100, rnn_size 512->300, heads 8 -> 5, transformer_ff 2048 -> 1024
 # save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 1000, train_steps 200000 -> 20000
 
 # General opts
@@ -52,10 +52,11 @@ train_steps: 20000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-#world_size: 2
-#gpu_ranks: [0, 1]
-world_size: 1
-gpu_ranks: [0]
+world_size: 2
+gpu_ranks: [0, 1]
+# To execute on a single gpu:
+#world_size: 1
+#gpu_ranks: [0]
 batch_type: "tokens"
 batch_size: 4096
 valid_batch_size: 8
