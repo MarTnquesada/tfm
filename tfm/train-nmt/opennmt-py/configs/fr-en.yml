@@ -1,17 +1,17 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/fr-en_300_unfrozen/samples
+save_data: data/models/trained/fr-en_300_frozen/samples
 ## Where the vocab(s) will be written
-src_vocab: data/models/trained/fr-en_300_unfrozen/vocab.src
-tgt_vocab: data/models/trained/fr-en_300_unfrozen/vocab.tgt
+src_vocab: data/models/trained/fr-en_300_frozen/vocab.src
+tgt_vocab: data/models/trained/fr-en_300_frozen/vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/fr-en_300_unfrozen/model
+save_model: data/models/trained/fr-en_300_frozen/model
 
 data:
     corpus_1:
@@ -32,8 +32,8 @@ embeddings_type: "word2vec"
 word_vec_size: 300
 
 # To freeze encoder and decoder embeddings
-#freeze_word_vecs_enc: true
-#freeze_word_vecs_dec: true
+freeze_word_vecs_enc: true
+freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
