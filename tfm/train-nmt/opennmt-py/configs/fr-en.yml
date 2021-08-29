@@ -18,8 +18,8 @@ data:
         path_src: data/datasets/parallel/fr-en.train.clean.fr
         path_tgt: data/datasets/parallel/fr-en.train.clean.en
     valid:
-        path_src: data/datasets/parallel/fr-en.train.clean.fr
-        path_tgt: data/datasets/parallel/fr-en.train.clean.en
+        path_src: data/datasets/parallel/fr-en.dev.clean.fr
+        path_tgt: data/datasets/parallel/fr-en.dev.clean.en
 
 
 # Embedding config
@@ -36,7 +36,8 @@ word_vec_size: 300
 #freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
-# embedding_size 512->100, rnn_size 512->300, heads 8 -> 5, transformer_ff 2048 -> 1024
+# BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
+# CHANGES: embedding_size 512->100, rnn_size 512->300, heads 8 -> 5, transformer_ff 2048 -> 1024
 # save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 1000, train_steps 200000 -> 20000
 
 # General opts
