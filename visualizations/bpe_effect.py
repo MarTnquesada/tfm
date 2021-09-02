@@ -12,10 +12,10 @@ def main():
     # All results estimated
     parser.add_argument('--results', default={
         'fr':{
-            'baseline': {'base': 0, 'bpe': 0},  #
-            'muse': {'base': 55.12, 'bpe': 199},
-            'vecmap': {'base': 58.22, 'bpe': 99},
-            'concat': {'base': 47.71, 'bpe': 99}
+            'baseline': {'base': 0, 'bpe': 0},
+            'muse': {'base': 55.12, 'bpe': 0}, # estimated
+            'vecmap': {'base': 58.22, 'bpe': 65.01},
+            'concat': {'base': 47.71, 'bpe': 0} # estimated
         },
 
     })
