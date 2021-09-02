@@ -2,8 +2,8 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 
-LABEL_LOOKUP = {'baseline': 'Baseline', 'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
-METHODS = ['baseline', 'muse', 'vecmap', 'concat']
+LABEL_LOOKUP = {'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
+METHODS = ['muse', 'vecmap', 'concat']
 BAR_WIDTH = 0.25
 
 
@@ -12,7 +12,6 @@ def main():
     # All results estimated
     parser.add_argument('--results', default={
         'fr':{
-            'baseline': {'base': 0, 'bpe': 0},
             'muse': {'base': 55.12, 'bpe': 0}, # estimated
             'vecmap': {'base': 58.22, 'bpe': 65.01},
             'concat': {'base': 47.71, 'bpe': 0} # estimated

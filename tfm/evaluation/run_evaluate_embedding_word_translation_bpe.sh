@@ -2,7 +2,7 @@
 
 echo
 echo ------------ BASELINE ------------
-echo ------- \(BASE TOKENIZATION\) -------
+echo ------- \(BPE TOKENIZATION\) -------
 echo ---\[COSINE SIMILARITY\]---
 echo LANG   ---   DIMENSION
 for lang in fr de ru hi; do
@@ -18,7 +18,7 @@ done
 
 echo
 echo ------------ VECMAP ------------
-echo ------- \(BASE TOKENIZATION\) -------
+echo ------- \(BPE TOKENIZATION\) -------
 echo ---\[COSINE SIMILARITY\]---
 echo LANG   ---   DIMENSION
 for lang in fr de ru hi; do
