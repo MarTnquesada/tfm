@@ -5,6 +5,10 @@ save_data: data/models/trained/fr-en_512_unfrozen/samples
 ## Where the vocab(s) will be written
 src_vocab: data/models/trained/fr-en_512_unfrozen/vocab.src
 tgt_vocab: data/models/trained/fr-en_512_unfrozen/vocab.tgt
+# If using BPE
+#src_vocab: data/datasets/monolingual/monolingual.clean.fr-en.bpe_48000.fr-en.vocab
+#tgt_vocab: data/datasets/monolingual/monolingual.clean.en.bpe_48000.fr-en.vocab
+#share_vocab: True
 # Prevent overwriting existing files in the folder
 overwrite: False
 

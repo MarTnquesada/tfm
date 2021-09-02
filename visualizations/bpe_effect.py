@@ -1,9 +1,10 @@
 import argparse
 import matplotlib.pyplot as plt
+import numpy as np
 
-COLOR_LOOKUP = {'muse': 'mediumblue', 'vecmap': 'orange','concat': 'grey'}
-LABEL_LOOKUP = {'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
-LINESTYLE_LOOKUP = {'muse': '-', 'vecmap': '--', 'concat': '-.'}
+LABEL_LOOKUP = {'baseline': 'Baseline', 'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
+METHODS = ['baseline', 'muse', 'vecmap', 'concat']
+BAR_WIDTH = 0.25
 
 
 def main():
@@ -11,30 +12,30 @@ def main():
     # All results estimated
     parser.add_argument('--results', default={
         'fr':{
-            'muse': {'base': 55.12, 'bpe': 0}, # 400, 500 and 1000 are estimated
-            'vecmap': {'base': 58.22, 'bpe': 0},
-            'concat': {'base': 47.71, 'bpe': 0}
+            'baseline': {'base': 0, 'bpe': 0},  #
+            'muse': {'base': 55.12, 'bpe': 199},
+            'vecmap': {'base': 58.22, 'bpe': 99},
+            'concat': {'base': 47.71, 'bpe': 99}
         },
 
     })
 
     args = parser.parse_args()
 
+
     for lang in ['fr']:#, 'de', 'ru', 'hi']:
-        for method in ['muse', 'vecmap', 'concat']:
-        plt.bar(LABEL_LOOKUP.values(), args.results)
-        plt.plot([dim for dim in results.keys()],
-                 [acc for dim, acc in results.items()],
-                 label=LABEL_LOOKUP[method], linestyle=LINESTYLE_LOOKUP[method], color=COLOR_LOOKUP[method],
-                 linewidth=3)#marker='o', markersize=5)
+        r1 = np.arange(len(METHODS))
+        r2 = [x + BAR_WIDTH for x in r1]
+        plt.bar(r1, [args.results[lang][method]['base'] for method in METHODS], color='blue', width=BAR_WIDTH, edgecolor='white', label='Base')
+        plt.bar(r2, [args.results[lang][method]['bpe'] for method in METHODS], color='firebrick', width=BAR_WIDTH, edgecolor='white', label='BPE')
 
-        plt.grid()
+        plt.xticks([r + BAR_WIDTH/2 for r in range(len(METHODS))], LABEL_LOOKUP.values(), fontsize=15)
+        #plt.grid()
         plt.gca().set_ylim(top=100, bottom=0)
-        plt.xlabel('Embedding dimension')
-        plt.ylabel('Accuracy')
-        plt.legend()
+        plt.ylabel('Accuracy', fontsize=16)
+        plt.legend(fontsize=16)
         plt.show()
-
+        plt.clf()
 
 if __name__ == '__main__':
     main()
