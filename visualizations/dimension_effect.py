@@ -1,7 +1,7 @@
 import argparse
 import matplotlib.pyplot as plt
 
-COLOR_LOOKUP = {'muse': 'mediumblue', 'vecmap': 'orange','concat': 'grey'}
+COLOR_LOOKUP = {'muse': 'mediumblue', 'vecmap': 'orange','concat': 'mediumseagreen'}
 LABEL_LOOKUP = {'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
 LINESTYLE_LOOKUP = {'muse': '-', 'vecmap': '--', 'concat': '-.'}
 
