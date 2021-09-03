@@ -41,8 +41,7 @@ word_vec_size: 512
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
-# CHANGES: embedding_size 512->100, rnn_size 512->300, heads 8 -> 5, transformer_ff 2048 -> 1024
-# save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 1000, train_steps 200000 -> 20000
+# CHANGES: save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 2000, train_steps 200000 -> 40000
 
 # General opts
 save_checkpoint_steps: 5000
