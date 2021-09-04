@@ -12,7 +12,7 @@ done
 if [ -z ${bpe+x} ]
 then
     echo "Building vocab for model ${config}"
-    onmt_build_vocab -config ${config} -n_sample 20000 # 50k is the standard, and I used 10k for the en-fr at the beginning
+    onmt_build_vocab -config ${config} -n_sample 10000
 else
     echo "BPE flag activated, assuming that vocabulary is already present"
 fi

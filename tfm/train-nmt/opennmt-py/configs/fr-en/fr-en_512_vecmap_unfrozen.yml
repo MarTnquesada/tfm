@@ -1,10 +1,10 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/fr-en_512_base/samples
+save_data: data/models/trained/fr-en_512_vecmap_unfrozen/samples
 ## Where the vocab(s) will be written
-src_vocab: data/models/trained/fr-en_512_base/vocab.src
-tgt_vocab: data/models/trained/fr-en_512_base/vocab.tgt
+src_vocab: data/models/trained/fr-en_512_vecmap_unfrozen/vocab.src
+tgt_vocab: data/models/trained/fr-en_512_vecmap_unfrozen/vocab.tgt
 # If using BPE
 #src_vocab: data/datasets/monolingual/monolingual.clean.fr-en.bpe_48000.fr-en.vocab
 #tgt_vocab: data/datasets/monolingual/monolingual.clean.en.bpe_48000.fr-en.vocab
@@ -15,7 +15,7 @@ overwrite: False
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/fr-en_512_base/model
+save_model: data/models/trained/fr-en_512_vecmap_unfrozen/model
 
 data:
     corpus_1:
@@ -30,8 +30,8 @@ data:
 # this means embeddings will be used for both encoder and decoder sides (only used for concat)
 #both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
 # to set src and tgt embeddings separately:
-src_embeddings: data/embeddings/monolingual-fr-3-6-512.vec
-tgt_embeddings: data/embeddings/monolingual-en-3-6-512.vec
+src_embeddings: data/embeddings/monolingual-fr-3-6-512-vecmap-en.vec
+tgt_embeddings: data/embeddings/monolingual-en-3-6-512-vecmap-fr.vec
 embeddings_type: "word2vec"
 word_vec_size: 512
 
@@ -41,10 +41,10 @@ word_vec_size: 512
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
-# CHANGES: save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 2000, train_steps 200000 -> 40000
+# CHANGES: transformer_ff 2048->1024 save_checkpoint_steps 10000 -> 5000, valid_steps 10000 -> 2000, train_steps 200000 -> 40000
 
 # General opts
-save_checkpoint_steps: 5000
+save_checkpoint_steps: 10000
 valid_steps: 2000
 train_steps: 40000
 # Batch size 4096 * 200000 training steps = 819,200,000 lines read for complete training

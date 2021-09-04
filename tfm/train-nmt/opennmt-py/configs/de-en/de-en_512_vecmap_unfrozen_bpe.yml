@@ -1,0 +1,93 @@
+### PRE-PROCESSING CONFIGURATION ###
+
+## Where the samples will be written
+save_data: data/models/trained/de-en_512_vecmap_unfrozen_bpe/samples
+## Where the vocab(s) will be written
+# If using BPE
+src_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
+tgt_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
+share_vocab: True
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+### TRAINING CONFIGURATION ###
+
+# Model path
+save_model: data/models/trained/de-en_512_vecmap_unfrozen_bpe/model
+
+data:
+    corpus_1:
+        path_src: data/datasets/parallel/de-en.train.clean.bpe_48000.de
+        path_tgt: data/datasets/parallel/de-en.train.clean.bpe_48000.en
+    valid:
+        path_src: data/datasets/parallel/de-en.dev.clean.bpe_48000.de
+        path_tgt: data/datasets/parallel/de-en.dev.clean.bpe_48000.en
+
+
+# Embedding config
+# this means embeddings will be used for both encoder and decoder sides (only used for concat)
+#both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
+# to set src and tgt embeddings separately:
+src_embeddings: data/embeddings/monolingual-de-3-6-512.bpe_48000.de-en.vecmap-en.vec
+tgt_embeddings: data/embeddings/monolingual-en-3-6-512.bpe_48000.de-en.vecmap-de.vec
+embeddings_type: "word2vec"
+word_vec_size: 512
+
+# To freeze encoder and decoder embeddings
+#freeze_word_vecs_enc: true
+#freeze_word_vecs_dec: true
+
+# Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
+# BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
+# CHANGES: transformer_ff 2048->1024, valid_steps 10000 -> 2000, train_steps 200000 -> 40000
+
+# General opts
+save_checkpoint_steps: 10000
+valid_steps: 2000
+train_steps: 40000
+# Batch size 4096 * 200000 training steps = 819,200,000 lines read for complete training
+# Since all parallel training datasets have anywhere from 5 to 2M lines (lets say average 4M),
+# this would amount to 819/4 = 205 epochs aprox.
+# It would probably be better to go with 50 epochs (50000 steps) or even 20 (20000 steps)
+
+# Batching
+queue_size: 10000
+bucket_size: 32768
+# For multi-gpu support:
+world_size: 2
+gpu_ranks: [0, 1]
+# To execute on a single gpu:
+#world_size: 1
+#gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 4096
+valid_batch_size: 4096
+max_generator_batches: 2
+accum_count: [4]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp32"
+optim: "adam"
+learning_rate: 2
+warmup_steps: 8000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+position_encoding: true
+enc_layers: 6
+dec_layers: 6
+heads: 8
+rnn_size: 512 # Needs to be divisible by the number of heads, should have the same size as the embeddings
+transformer_ff: 1024
+dropout_steps: [0]
+dropout: [0.1]
+attention_dropout: [0.1]
