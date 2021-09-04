@@ -54,8 +54,8 @@ train_steps: 40000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-world_size: 2
-gpu_ranks: [0, 1]
+world_size: 1
+gpu_ranks: [0]
 # To execute on a single gpu:
 #world_size: 1
 #gpu_ranks: [0]
