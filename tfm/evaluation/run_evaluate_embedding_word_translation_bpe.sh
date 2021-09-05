@@ -5,7 +5,7 @@ echo ------------ CONCAT------------
 echo ------- \(BPE TOKENIZATION\) -------
 echo ---\[COSINE SIMILARITY\]---
 echo LANG   ---   DIMENSION
-for lang in ru hi; do
+for lang in fr de ru hi; do
     for dimension in 512; do
         echo ${lang}   ---   ${dimension}
         python3 -m tfm.evaluation.evaluate_embedding_word_translation \
