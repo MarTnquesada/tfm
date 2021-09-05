@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 for lang in de; do
-    for method in base muse vecmap concat; do
+    for method in muse vecmap concat; do
         for dimension in 512; do
             for weights in unfrozen; do
                 mkdir data/models/trained/${lang}-en_${dimension}_${method}_${weights}_bpe/

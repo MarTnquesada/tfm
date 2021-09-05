@@ -45,8 +45,8 @@ freeze_word_vecs_dec: true
 
 # General opts
 save_checkpoint_steps: 10000
-valid_steps: 2000
-train_steps: 40000
+valid_steps: 1000
+train_steps: 20000
 # Batch size 4096 * 200000 training steps = 819,200,000 lines read for complete training
 # Since all parallel training datasets have anywhere from 5 to 2M lines (lets say average 4M),
 # this would amount to 819/4 = 205 epochs aprox.
