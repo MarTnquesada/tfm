@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 
 echo
+echo ------------ CONCAT------------
+echo ------- \(BPE TOKENIZATION\) -------
+echo ---\[COSINE SIMILARITY\]---
+echo LANG   ---   DIMENSION
+for lang in ru hi; do
+    for dimension in 512; do
+        echo ${lang}   ---   ${dimension}
+        python3 -m tfm.evaluation.evaluate_embedding_word_translation \
+        data/embeddings/monolingual-${lang}-en-3-6-${dimension}.bpe_48000.vec \
+        data/embeddings/monolingual-${lang}-en-3-6-${dimension}.bpe_48000.vec \
+        -d data/datasets/eval_dicts/${lang}-en.txt \
+        --retrieval csls
+    done
+done
+
+echo
 echo ------------ MUSE ------------
 echo ------- \(BPE TOKENIZATION\) -------
 echo ---\[COSINE SIMILARITY\]---

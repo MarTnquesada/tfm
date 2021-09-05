@@ -32,9 +32,10 @@ def main():
     emb = KeyedVectors.load_word2vec_format(args.embedding, binary=False)
 
     tsne_ak_2d = TSNE(perplexity=30, n_components=2, init='pca', n_iter=3500, random_state=32)
-    embs = tsne_ak_2d.fit_transform(emb.vectors)
+    #emb.sort_by_descending_frequency()  -- the KeyedVectors object is already sorted by default
+    vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, 9999)])
 
-    tsne_plot_2d('Oiseau', embs, a=0.1)
+    tsne_plot_2d('Oiseau', vectors, a=0.1)
 
 if __name__ == '__main__':
     main()
