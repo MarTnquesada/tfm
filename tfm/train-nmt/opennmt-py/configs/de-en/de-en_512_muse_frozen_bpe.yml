@@ -1,11 +1,11 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/ru-en_512_concat_unfrozen_bpe/samples
+save_data: data/models/trained/de-en_512_muse_unfrozen_bpe/samples
 ## Where the vocab(s) will be written
 # If using BPE
-src_vocab: data/datasets/monolingual/monolingual.clean.ru-en.bpe_48000.ru-en.vocab
-tgt_vocab: data/datasets/monolingual/monolingual.clean.ru-en.bpe_48000.ru-en.vocab
+src_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
+tgt_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
 share_vocab: True
 # Prevent overwriting existing files in the folder
 overwrite: False
@@ -13,23 +13,23 @@ overwrite: False
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/ru-en_512_concat_unfrozen_bpe/model
+save_model: data/models/trained/de-en_512_muse_unfrozen_bpe/model
 
 data:
     corpus_1:
-        path_src: data/datasets/parallel/ru-en.train.clean.bpe_48000.ru
-        path_tgt: data/datasets/parallel/ru-en.train.clean.bpe_48000.en
+        path_src: data/datasets/parallel/de-en.train.clean.bpe_48000.de
+        path_tgt: data/datasets/parallel/de-en.train.clean.bpe_48000.en
     valid:
-        path_src: data/datasets/parallel/ru-en.dev.clean.bpe_48000.ru
-        path_tgt: data/datasets/parallel/ru-en.dev.clean.bpe_48000.en
+        path_src: data/datasets/parallel/de-en.dev.clean.bpe_48000.de
+        path_tgt: data/datasets/parallel/de-en.dev.clean.bpe_48000.en
 
 
 # Embedding config
 # this means embeddings will be used for both encoder and decoder sides (only used for concat)
-both_embeddings: data/embeddings/monolingual-ru-en-3-6-512.bpe_48000.vec
+#both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
 # to set src and tgt embeddings separately:
-#src_embeddings: data/embeddings/monolingual-fr-3-6-512.bpe_48000.fr-en.vecmap-en.vec
-#tgt_embeddings: data/embeddings/monolingual-en-3-6-512.bpe_48000.fr-en.vecmap-fr.vec
+src_embeddings: data/embeddings/de-en-muse/512-bpe/vectors-de.txt
+tgt_embeddings: data/embeddings/de-en-muse/512-bpe/vectors-en.txt
 embeddings_type: "word2vec"
 word_vec_size: 512
 
@@ -54,8 +54,8 @@ train_steps: 20000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-world_size: 2
-gpu_ranks: [0, 1]
+world_size: 1
+gpu_ranks: [0]
 # To execute on a single gpu:
 #world_size: 1
 #gpu_ranks: [0]

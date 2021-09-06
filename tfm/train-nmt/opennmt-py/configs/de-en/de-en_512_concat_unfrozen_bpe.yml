@@ -34,8 +34,8 @@ embeddings_type: "word2vec"
 word_vec_size: 512
 
 # To freeze encoder and decoder embeddings
-freeze_word_vecs_enc: true
-freeze_word_vecs_dec: true
+#freeze_word_vecs_enc: true
+#freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
