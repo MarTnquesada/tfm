@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-for lang in de; do
+# BPE
+for lang in fr ru; do
     for method in base muse vecmap concat; do
         for dimension in 512; do
             for weights in unfrozen; do

@@ -8,25 +8,24 @@ from gensim.models import KeyedVectors
 
 
 
-def tsne_plot_2d(label, embeddings, words=[], a=1):
+def tsne_plot_2d(embeddings, words=[], a=1, path='test.pdf'):
     plt.figure(figsize=(16, 9))
     colors = cm.rainbow(np.linspace(0, 1, 1))
     x = embeddings[:,0]
     y = embeddings[:,1]
-    plt.scatter(x, y, c=colors, alpha=a, label=label)
+    plt.scatter(x, y, c=colors, alpha=a)
     for i, word in enumerate(words):
         plt.annotate(word, alpha=0.3, xy=(x[i], y[i]), xytext=(5, 2),
                      textcoords='offset points', ha='right', va='bottom', size=10)
-    plt.legend(loc=4)
     plt.grid(True)
-    plt.savefig("hhh.png", format='png', dpi=150, bbox_inches='tight')
+    plt.savefig(path, format='pdf', dpi=150, bbox_inches='tight')
     plt.show()
 
 
 def main():
     parser = argparse.ArgumentParser()
     # All results estimated
-    parser.add_argument('--embedding', default="../data/embeddings/monolingual-fr-3-6-50.vec")
+    parser.add_argument('--embedding', default="../data/embeddings/monolingual-fr-3-6-512.vec")
     args = parser.parse_args()
 
     emb = KeyedVectors.load_word2vec_format(args.embedding, binary=False)
@@ -35,7 +34,7 @@ def main():
     #emb.sort_by_descending_frequency()  -- the KeyedVectors object is already sorted by default
     vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, 9999)])
 
-    tsne_plot_2d('Oiseau', vectors, a=0.1)
+    tsne_plot_2d(vectors, a=0.1, path='monolingual-fr-3-6-512.pdf')
 
 if __name__ == '__main__':
     main()
