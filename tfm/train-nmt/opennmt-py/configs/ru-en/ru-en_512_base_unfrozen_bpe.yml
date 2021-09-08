@@ -76,7 +76,7 @@ adam_beta2: 0.998
 max_grad_norm: 0
 label_smoothing: 0.1
 param_init: 0
-param_init_glorot: true
+param_init_glorot: tru
 normalization: "tokens"
 
 # Model

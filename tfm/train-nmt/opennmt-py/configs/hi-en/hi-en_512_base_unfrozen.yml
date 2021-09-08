@@ -1,41 +1,43 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/de-en_512_vecmap_frozen_bpe/samples
+save_data: data/models/trained/hi-en_512_base_unfrozen/samples
 ## Where the vocab(s) will be written
+src_vocab: data/models/trained/hi-en_512_base_unfrozen/vocab.src
+tgt_vocab: data/models/trained/hi-en_512_base_unfrozen/vocab.tgt
 # If using BPE
-src_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
-tgt_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
-share_vocab: True
+#src_vocab: data/datasets/monolingual/monolingual.clean.fr-en.bpe_48000.fr-en.vocab
+#tgt_vocab: data/datasets/monolingual/monolingual.clean.en.bpe_48000.fr-en.vocab
+#share_vocab: True
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/de-en_512_vecmap_frozen_bpe/model
+save_model: data/models/trained/hi-en_512_base_unfrozen/model
 
 data:
     corpus_1:
-        path_src: data/datasets/parallel/de-en.train.clean.bpe_48000.de
-        path_tgt: data/datasets/parallel/de-en.train.clean.bpe_48000.en
+        path_src: data/datasets/parallel/hi-en.train.clean.hi
+        path_tgt: data/datasets/parallel/hi-en.train.clean.en
     valid:
-        path_src: data/datasets/parallel/de-en.dev.clean.bpe_48000.de
-        path_tgt: data/datasets/parallel/de-en.dev.clean.bpe_48000.en
+        path_src: data/datasets/parallel/hi-en.dev.clean.hi
+        path_tgt: data/datasets/parallel/hi-en.dev.clean.en
 
 
 # Embedding config
 # this means embeddings will be used for both encoder and decoder sides (only used for concat)
 #both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
 # to set src and tgt embeddings separately:
-src_embeddings: data/embeddings/monolingual-de-3-6-512.bpe_48000.de-en.vecmap-en.vec
-tgt_embeddings: data/embeddings/monolingual-en-3-6-512.bpe_48000.de-en.vecmap-de.vec
+src_embeddings: data/embeddings/monolingual-hi-3-6-512.vec
+tgt_embeddings: data/embeddings/monolingual-en-3-6-512.vec
 embeddings_type: "word2vec"
 word_vec_size: 512
 
 # To freeze encoder and decoder embeddings
-freeze_word_vecs_enc: true
-freeze_word_vecs_dec: true
+#freeze_word_vecs_enc: true
+#freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
@@ -54,8 +56,8 @@ train_steps: 20000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-world_size: 2
-gpu_ranks: [0, 1]
+world_size: 1
+gpu_ranks: [0]
 # To execute on a single gpu:
 #world_size: 1
 #gpu_ranks: [0]

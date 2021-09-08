@@ -1,7 +1,7 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/de-en_512_base_unfrozen_bpe/samples
+save_data: data/models/trained/de-en_512_base_frozen_bpe/samples
 ## Where the vocab(s) will be written
 # If using BPE
 src_vocab: data/datasets/monolingual/monolingual.clean.de-en.bpe_48000.de-en.vocab
@@ -13,7 +13,7 @@ overwrite: False
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/de-en_512_base_unfrozen_bpe/model
+save_model: data/models/trained/de-en_512_base_frozen_bpe/model
 
 data:
     corpus_1:
@@ -54,8 +54,8 @@ train_steps: 20000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-world_size: 1
-gpu_ranks: [0]
+world_size: 2
+gpu_ranks: [0, 1]
 # To execute on a single gpu:
 #world_size: 1
 #gpu_ranks: [0]

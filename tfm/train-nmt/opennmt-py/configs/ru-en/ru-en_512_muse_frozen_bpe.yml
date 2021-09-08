@@ -1,7 +1,7 @@
 ### PRE-PROCESSING CONFIGURATION ###
 
 ## Where the samples will be written
-save_data: data/models/trained/ru-en_512_vecmap_unfrozen_bpe/samples
+save_data: data/models/trained/ru-en_512_muse_frozen_bpe/samples
 ## Where the vocab(s) will be written
 # If using BPE
 src_vocab: data/datasets/monolingual/monolingual.clean.ru-en.bpe_48000.ru-en.vocab
@@ -13,7 +13,7 @@ overwrite: False
 ### TRAINING CONFIGURATION ###
 
 # Model path
-save_model: data/models/trained/ru-en_512_vecmap_unfrozen_bpe/model
+save_model: data/models/trained/ru-en_512_muse_frozen_bpe/model
 
 data:
     corpus_1:
@@ -28,14 +28,14 @@ data:
 # this means embeddings will be used for both encoder and decoder sides (only used for concat)
 #both_embeddings: data/embeddings/monolingual-fr-en-3-6-300.vec
 # to set src and tgt embeddings separately:
-src_embeddings: data/embeddings/monolingual-ru-3-6-512.bpe_48000.ru-en.vecmap-en.vec
-tgt_embeddings: data/embeddings/monolingual-en-3-6-512.bpe_48000.ru-en.vecmap-ru.vec
+src_embeddings: data/embeddings/ru-en-muse/512-bpe/vectors-ru.txt
+tgt_embeddings: data/embeddings/ru-en-muse/512-bpe/vectors-en.txt
 embeddings_type: "word2vec"
 word_vec_size: 512
 
 # To freeze encoder and decoder embeddings
-#freeze_word_vecs_enc: true
-#freeze_word_vecs_dec: true
+freeze_word_vecs_enc: true
+freeze_word_vecs_dec: true
 
 # Transformer configuration that mimics Google's setup in https://arxiv:org/abs/1706:03762 except for:
 # BUGFIX: correcting valid batch size from 8 to 4096 tokens to be equal to training batch size,
@@ -54,8 +54,8 @@ train_steps: 20000
 queue_size: 10000
 bucket_size: 32768
 # For multi-gpu support:
-world_size: 1
-gpu_ranks: [0]
+world_size: 2
+gpu_ranks: [0, 1]
 # To execute on a single gpu:
 #world_size: 1
 #gpu_ranks: [0]

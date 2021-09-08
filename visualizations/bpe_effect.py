@@ -12,24 +12,24 @@ def main():
     # All results estimated
     parser.add_argument('--results', default={
         'fr':{
-            'muse': {'base': 55.12, 'bpe': 61.18}, # estimated
+            'muse': {'base': 56.16, 'bpe': 62.20},
             'vecmap': {'base': 58.22, 'bpe': 65.01},
-            'concat': {'base': 47.71, 'bpe': 52.11} # estimated
+            'concat': {'base': 47.71, 'bpe': 46.58}
         },
         'de':{
-            'muse': {'base': 37.76, 'bpe': 45.31}, # estimated
+            'muse': {'base': 38.06, 'bpe': 41.39},
             'vecmap': {'base': 38.77, 'bpe': 46.24},
-            'concat': {'base': 53.84, 'bpe': 62.12} # estimated
+            'concat': {'base': 53.84, 'bpe': 45.28}
         },
         'ru': {
-            'muse': {'base': 40.82, 'bpe': 53.05},  # estimated
+            'muse': {'base': 44.34, 'bpe': 0.14},
             'vecmap': {'base': 46.21, 'bpe': 59.98},
-            'concat': {'base': 0, 'bpe': 13.4}  # estimated
+            'concat': {'base': 0, 'bpe': 0}
         },
         'hi': {
-            'muse': {'base': 27.27, 'bpe': 42.46},  # estimated
+            'muse': {'base': 0.08, 'bpe': 42.27},
             'vecmap': {'base': 29.17, 'bpe': 44.76},
-            'concat': {'base': 0, 'bpe': 9.2}  # estimated
+            'concat': {'base': 0, 'bpe': 0}
         },
 
     })
