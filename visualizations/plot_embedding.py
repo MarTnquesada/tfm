@@ -27,7 +27,7 @@ def tsne_plot_2d(embeddings, words=[], a=1, path='test.pdf'):
 def main():
     parser = argparse.ArgumentParser()
     # All results estimated
-    parser.add_argument('--embedding', default="../data/embeddings/monolingual-fr-3-6-512.bpe_48000.fr-en.vec")
+    parser.add_argument('--embedding', default="../data/embeddings/de-en-muse/512-bpe/vectors-de.txt")
     args = parser.parse_args()
 
     emb = KeyedVectors.load_word2vec_format(args.embedding, binary=False)
@@ -36,7 +36,7 @@ def main():
     #emb.sort_by_descending_frequency()  -- the KeyedVectors object is already sorted by default
     vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, 20000)])
 
-    tsne_plot_2d(vectors, a=0.1, path='monolingual-fr-3-6-512.bpe_48000.fr-en.pdf')
+    tsne_plot_2d(vectors, a=0.1, path='muse-de-en-bpe.de.pdf')
 
 if __name__ == '__main__':
     main()
