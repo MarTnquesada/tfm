@@ -8,9 +8,9 @@ from gensim.models import KeyedVectors
 
 
 
-def tsne_plot_2d(embeddings, words=[], a=1, path='test.pdf'):
+def tsne_plot_2d(embeddings, words=[], a=1, color='red', path='test.pdf'):
     plt.figure(figsize=(16, 9))
-    colors = ['red']# cm.rainbow(np.linspace(0, 1, 1))
+    colors = [color]# cm.rainbow(np.linspace(0, 1, 1))
     x = embeddings[:,0]
     y = embeddings[:,1]
     plt.scatter(x, y, c=colors, alpha=a)
@@ -28,15 +28,19 @@ def main():
     parser = argparse.ArgumentParser()
     # All results estimated
     parser.add_argument('--embedding', default="../data/embeddings/de-en-muse/512-bpe/vectors-de.txt")
+    parser.add_argument('--color', default="blue")
+    parser.add_argument('--top_k', default=20000, type=int)
+    parser.add_argument('--words', default=[])
+    parser.add_argument('--path', default='muse-de-en-bpe.de.pdf')
     args = parser.parse_args()
 
     emb = KeyedVectors.load_word2vec_format(args.embedding, binary=False)
 
     tsne_ak_2d = TSNE(perplexity=30, n_components=2, init='pca', n_iter=3500, random_state=32)
     #emb.sort_by_descending_frequency()  -- the KeyedVectors object is already sorted by default
-    vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, 20000)])
+    vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, args.top_k)])
 
-    tsne_plot_2d(vectors, a=0.1, path='muse-de-en-bpe.de.pdf')
+    tsne_plot_2d(vectors, a=0.1, color=args.color, words=args.words, path=args.path)
 
 if __name__ == '__main__':
     main()
