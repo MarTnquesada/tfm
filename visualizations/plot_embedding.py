@@ -30,8 +30,8 @@ def main():
     parser.add_argument('--embedding', default="../data/embeddings/de-en-muse/512-bpe/vectors-de.txt")
     parser.add_argument('--color', default="blue")
     parser.add_argument('--top_k', default=20000, type=int)
-    parser.add_argument('--words', default=['animal','newspaper','government','science','residents','police','economy'])
-    parser.add_argument('--words1', default=['tier','zeitung','regierung','science','wissenschaft','polizei','wirtschaft'])
+    parser.add_argument('--words1', default=['animal','newspaper','government','science','residents','police','economy'])
+    parser.add_argument('--words', default=['tier','zeitung','regierung','science','wissenschaft','polizei','wirtschaft'])
     parser.add_argument('--path', default='muse-de-en-bpe.de.pdf')
     args = parser.parse_args()
 
