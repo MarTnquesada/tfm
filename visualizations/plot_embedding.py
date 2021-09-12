@@ -15,7 +15,7 @@ def tsne_plot_2d(embeddings, words=[], a=1, color='red', path='test.pdf'):
     y = embeddings[:,1]
     plt.scatter(x, y, c=colors, alpha=a)
     for i, word in enumerate(words):
-        plt.annotate(word, alpha=0.3, xy=(x[i], y[i]), xytext=(5, 2),
+        plt.annotate(word, alpha=1, xy=(x[i], y[i]), xytext=(15, 6),
                      textcoords='offset points', ha='right', va='bottom', size=10)
     plt.grid(True)
     plt.xticks([])
@@ -30,7 +30,7 @@ def main():
     parser.add_argument('--embedding', default="../data/embeddings/de-en-muse/512-bpe/vectors-de.txt")
     parser.add_argument('--color', default="blue")
     parser.add_argument('--top_k', default=20000, type=int)
-    parser.add_argument('--words', default=['animal','newspaper','government','science','residents','police','economy'])
+    parser.add_argument('--words', default=['tier','zeitung','regierung','science','wissenschaft','polizei','wirtschaft'])
     parser.add_argument('--path', default='muse-de-en-bpe.de.pdf')
     args = parser.parse_args()
 
@@ -43,7 +43,7 @@ def main():
     else:
         vectors = tsne_ak_2d.fit_transform([emb[n] for n in range(0, args.top_k)])
 
-    tsne_plot_2d(vectors, a=0.1, color=args.color, words=args.words, path=args.path)
+    tsne_plot_2d(vectors, a=1, color=args.color, words=args.words, path=args.path)
 
 if __name__ == '__main__':
     main()
