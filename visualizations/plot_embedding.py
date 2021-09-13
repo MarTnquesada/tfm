@@ -43,8 +43,8 @@ def main():
     if args.words1 or args.words2:
         emb1 = KeyedVectors.load_word2vec_format(args.embedding1, binary=False)
         vectors1 = tsne_ak_2d.fit_transform([emb1[w] for w in args.words1])
-        #del emb1
-        emb2 = emb1 #KeyedVectors.load_word2vec_format(args.embedding2, binary=False)
+        del emb1
+        emb2 = KeyedVectors.load_word2vec_format(args.embedding2, binary=False)
         vectors2 = tsne_ak_2d.fit_transform([emb2[w] for w in args.words2])
         del emb2
     else:
