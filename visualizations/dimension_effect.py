@@ -1,7 +1,7 @@
 import argparse
 import matplotlib.pyplot as plt
 
-COLOR_LOOKUP = {'muse': 'mediumblue', 'vecmap': 'orange','concat': 'mediumseagreen'}
+COLOR_LOOKUP = {'muse': 'mediumblue', 'vecmap': 'orange','concat': 'mediumseagreen'} # black dimgrey darkgrey
 LABEL_LOOKUP = {'muse': 'MUSE', 'vecmap': 'VecMap', 'concat': 'Concatenation'}
 LINESTYLE_LOOKUP = {'muse': '-', 'vecmap': '--', 'concat': '-.'}
 
@@ -40,14 +40,14 @@ def main():
             plt.plot([dim for dim in results.keys()],
                      [acc for dim, acc in results.items()],
                      label=LABEL_LOOKUP[method], linestyle=LINESTYLE_LOOKUP[method], color=COLOR_LOOKUP[method],
-                     linewidth=3)#marker='o', markersize=5)
+                     linewidth=4)
 
         plt.grid()
         plt.setp(plt.gca().get_xticklabels(), fontsize=14)
         plt.setp(plt.gca().get_yticklabels(), fontsize=14)
         plt.gca().set_ylim(top=100, bottom=-2)
         plt.xlabel('Dimension', fontsize=16)
-        plt.ylabel('Accuracy', fontsize=16)
+        plt.ylabel('Word Translation Accuracy', fontsize=16)
         plt.legend(fontsize=16)
         plt.savefig(f'{lang}-en_dimension.pdf')
         plt.clf()

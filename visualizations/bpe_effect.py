@@ -48,7 +48,7 @@ def main():
         plt.gca().set_ylim(top=100, bottom=0)
         plt.ylabel('Accuracy', fontsize=16)
         plt.legend(fontsize=16)
-        plt.savefig(f'{lang}-en_bpe.pdf')
+        plt.savefig(f'{lang}-en_bpe.png')
         plt.clf()
 
 if __name__ == '__main__':
